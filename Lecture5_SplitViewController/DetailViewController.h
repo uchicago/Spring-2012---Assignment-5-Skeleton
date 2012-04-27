@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MasterDetailDelegate.h"
 
-@interface DetailViewController : UIViewController <UISplitViewControllerDelegate>
+@interface DetailViewController : UIViewController <UISplitViewControllerDelegate,MasterDetailDelegate>
 
 @property (strong, nonatomic) id detailItem;
 
 @property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+
+@property (strong, nonatomic) UIPopoverController *actionPopover;
+@property (weak, nonatomic) IBOutlet UIWebView *webview;
 
 @end

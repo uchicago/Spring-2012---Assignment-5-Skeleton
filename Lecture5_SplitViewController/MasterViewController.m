@@ -18,6 +18,8 @@
 @implementation MasterViewController
 
 @synthesize detailViewController = _detailViewController;
+@synthesize delegate = _delegate;
+@synthesize feed = _feed;
 
 - (void)awakeFromNib
 {
@@ -35,12 +37,18 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+
+    _delegate = self.detailViewController;
+    
+    // Download the data in the background
+    [self downloadData];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+    self.delegate = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -67,15 +75,20 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    //return _objects.count;
+    return [self.feed count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
 
-    NSDate *object = [_objects objectAtIndex:indexPath.row];
-    cell.textLabel.text = [object description];
+    //NSDate *object = [_objects objectAtIndex:indexPath.row];
+    //cell.textLabel.text = [object description];
+    NSDictionary *article = [self.feed objectAtIndex:indexPath.row];
+    NSLog(@"Article:%@",article);
+    cell.textLabel.text = [article objectForKey:@"title"];
+    cell.detailTextLabel.text = [article objectForKey:@"pubDate"];
     return cell;
 }
 
@@ -113,8 +126,65 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDate *object = [_objects objectAtIndex:indexPath.row];
-    self.detailViewController.detailItem = object;
+    //NSDate *object = [_objects objectAtIndex:indexPath.row];
+    NSString *articleURL = @"HI";//[[self.feed objectAtIndex:indexPath.row] objectForKey:@"link"];
+    self.detailViewController.detailItem = articleURL;
+
+    //
+    [self.delegate masterDetailChanged:[self.feed objectAtIndex:indexPath.row]];
 }
 
+#pragma mark - Download Data
+/*******************************************************************************
+ * @method      downloadData
+ * @abstract    <# abstract #>
+ * @description <# description #>
+ *******************************************************************************/
+- (void) downloadData
+{
+    NSURL *url=[NSURL URLWithString:@"http://pipes.yahoo.com/pipes/pipe.run?_id=2FV68p9G3BGVbc7IdLq02Q&_render=json&feedcount=20&feedurl=www.sciencenews.org%2Fview%2Ffeed%2Ftype%2Farticle%2Fname%2Ffeatures.rss"];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),^{
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        
+        dispatch_async(dispatch_get_main_queue(),^{
+            NSError *error = nil;
+            NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+            //NSLog(@"Json as NSDictionary: %@",results);
+            //NSLog(@"Json as NSDictionary: %@",[[[results objectForKey:@"value"] objectForKey:@"items"] objectAtIndex:0]);
+            
+            self.feed = [NSMutableArray arrayWithArray:[[results objectForKey:@"value"] objectForKey:@"items"] ];
+            // Process the results (i.e. conver the NSDictionary into an NSArray that will be read by the UITableView dataSource)
+            // 
+            //NSLog(@"Feed:%@",self.feed);
+            // Reload the table
+            [self.tableView reloadData];
+        });
+    });
+}
+
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

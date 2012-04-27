@@ -23,17 +23,18 @@
 		37AFDBE11548B17200DDB57D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		37AFDBE31548B17200DDB57D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		37AFDBE51548B17200DDB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		37AFDBE91548B17200DDB57D /* Lecture5_SplitViewController-Info.plist */ = {isa = PBXFileReference; path = "Lecture5_SplitViewController-Info.plist"; sourceTree = "<group>"; };
+		37AFDBE91548B17200DDB57D /* Lecture5_SplitViewController-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Lecture5_SplitViewController-Info.plist"; sourceTree = "<group>"; };
 		37AFDBEB1548B17200DDB57D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37AFDBED1548B17200DDB57D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		37AFDBEF1548B17200DDB57D /* Lecture5_SplitViewController-Prefix.pch */ = {isa = PBXFileReference; path = "Lecture5_SplitViewController-Prefix.pch"; sourceTree = "<group>"; };
-		37AFDBF01548B17200DDB57D /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		37AFDBEF1548B17200DDB57D /* Lecture5_SplitViewController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lecture5_SplitViewController-Prefix.pch"; sourceTree = "<group>"; };
+		37AFDBF01548B17200DDB57D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		37AFDBF11548B17200DDB57D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		37AFDBF41548B17200DDB57D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		37AFDBF61548B17200DDB57D /* MasterViewController.h */ = {isa = PBXFileReference; path = MasterViewController.h; sourceTree = "<group>"; };
+		37AFDBF61548B17200DDB57D /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		37AFDBF71548B17200DDB57D /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		37AFDBF91548B17200DDB57D /* DetailViewController.h */ = {isa = PBXFileReference; path = DetailViewController.h; sourceTree = "<group>"; };
+		37AFDBF91548B17200DDB57D /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		37AFDBFA1548B17200DDB57D /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		37AFDC1A1549B1BB00DDB57D /* MasterDetailDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterDetailDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +84,7 @@
 				37AFDBF01548B17200DDB57D /* AppDelegate.h */,
 				37AFDBF11548B17200DDB57D /* AppDelegate.m */,
 				37AFDBF31548B17200DDB57D /* MainStoryboard.storyboard */,
+				37AFDC1A1549B1BB00DDB57D /* MasterDetailDelegate.h */,
 				37AFDBF61548B17200DDB57D /* MasterViewController.h */,
 				37AFDBF71548B17200DDB57D /* MasterViewController.m */,
 				37AFDBF91548B17200DDB57D /* DetailViewController.h */,
@@ -283,6 +285,7 @@
 				37AFDC001548B17200DDB57D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
